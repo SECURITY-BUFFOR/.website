@@ -1,0 +1,151 @@
+# Configuration
+baseURL: "https://securitybuffor.com/"
+title: "SECURITY-BUFFOR"
+theme: "hextra-modified"
+enableRobotsTXT: true
+# Parse Git commit
+enableGitInfo: false
+# enableEmoji: false
+hasCJKLanguage: true
+
+outputs:
+  home: [HTML]
+  page: [HTML]
+  section: [HTML, RSS]
+
+defaultContentLanguage: en
+languages:
+  en:
+    languageName: English
+    weight: 1
+    title: SECURITY-BUFFOR
+
+
+markup:
+  highlight:
+    noClasses: false
+  goldmark:
+    renderer:
+      unsafe: true
+    extensions:
+      passthrough:
+        delimiters:
+          block: [['\[', '\]'], ['$$', '$$']]
+          inline: [['\(', '\)']]
+        enable: true
+
+enableInlineShortcodes: true
+
+menu:
+  main:
+    - identifier: lair
+      name: LAIR
+      pageRef: /lair
+      weight: 1
+    - identifier: rt-wiki
+      name: RT Wiki
+      pageRef: /rt-wiki
+      weight: 2
+
+    - identifier: projects
+      name: Projects
+      pageRef: /projects
+      weight: 3
+    - identifier: about
+      name: About
+      pageRef: /about
+      weight: 4
+    - name: Search
+      weight: 5
+      params:
+        type: search
+    - name: GitHub
+      weight: 6
+      url: "https://github.com/SECURITY-BUFFOR"
+      params:
+        icon: github
+    
+
+  sidebar:
+    - identifier: more
+      name: More
+      params:
+        type: separator
+      weight: 1
+    - identifier: about
+      name: "About"
+      pageRef: "/about"
+      weight: 2
+    - identifier: lair
+      name: "Lair ↗"
+      url: "/lair"
+      weight: 3
+
+params:
+  description: Modern, responsive, batteries-included Hugo theme for creating beautiful static websites.
+
+  navbar:
+    displayTitle: true
+    displayLogo: true
+    logo:
+      path: images/sb-logo.png
+      dark: images/sb-logo.png
+      width: 50
+      height: 40
+      link: /
+    width: wide
+
+  page:
+    # full (100%), wide (90rem), normal (80rem)
+    width: normal
+
+  theme:
+    # light | dark | system
+    default: dark
+    displayToggle: false
+
+  footer:
+    enable: true
+    displayCopyright: true
+    width: normal
+
+  # Display the last modification date
+  displayUpdatedDate: true
+  dateFormat: "January 2, 2006"
+
+  # Search
+  # flexsearch is enabled by default
+  search:
+    enable: true
+    type: flexsearch
+
+    flexsearch:
+      # index page by: content | summary | heading | title
+      index: content
+      # full | forward | reverse | strict
+      # https://github.com/nextapps-de/flexsearch/#tokenizer-prefix-search
+      tokenize: forward
+
+  editURL:
+    enable: true
+    base: "https://github.com/imfing/hextra/edit/main/exampleSite/content"
+
+  blog:
+    list:
+      displayTags: true
+      # date | lastmod | publishDate | title | weight
+      sortBy: date
+      sortOrder: desc # or "asc"
+
+    article:
+      displayPagination: true
+
+  toc:
+    displayTags: true
+
+  highlight:
+    copy:
+      enable: true
+      # hover | always
+      display: hover
+
