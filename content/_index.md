@@ -23,6 +23,13 @@ layout: hextra-home
     title="LAIR"
     subtitle="Usermode codesnippets that could be useful"
     link="lair"
+    style="background: radial-gradient(ellipse at 50% 80%,rgba(245, 158, 11, 0.15),hsla(0,0%,100%,0));"
+  >}}
+
+  {{< hextra/feature-card
+    title="RT Wiki"
+    subtitle="Course reviews & RT Methodologies"
+    link="rt-wiki"
     style="background: radial-gradient(ellipse at 50% 80%,rgba(254, 97, 97, 0.15),hsla(0,0%,100%,0));"
   >}}
   

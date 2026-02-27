@@ -233,12 +233,13 @@ layout: hextra-home
     title="LinkedIn"
     subtitle="Visit my LinkedIn profile"
     link="https://www.linkedin.com/in/kgres/"
-    style="background: radial-gradient(ellipse at 50% 80%,rgba(254, 97, 97, 0.15),hsla(0,0%,100%,0)); display:flex;"
+    style="background: radial-gradient(ellipse at 50% 80%,rgba(10, 102, 194, 0.15),hsla(0,0%,100%,0));"
+
   >}}
   {{< hextra/feature-card
     title="E-Mail"
     subtitle="Write me: h4mr3r\@securitybuffor.com"
     link="mailto:h4mr3r@securitybuffor.com"
-    style="background: radial-gradient(ellipse at 50% 80%,rgba(254, 97, 97, 0.15),hsla(0,0%,100%,0)); display:flex;"
+    style="background: radial-gradient(ellipse at 50% 80%,rgba(99, 102, 241, 0.15),hsla(0,0%,100%,0));"
   >}}
 {{< /hextra/feature-grid >}}
