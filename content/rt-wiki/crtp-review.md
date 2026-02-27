@@ -1,6 +1,6 @@
 ---
 title: CRTP Review
-weight: 2
+weight: 1
 tags:
     - CRTP
     - Review
