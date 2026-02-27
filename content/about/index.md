@@ -90,22 +90,44 @@ layout: hextra-home
 </style>
 <br />
 {{< hextra/hero-headline >}}
-  \$WHOAMI
+  $WHOAMI
 {{< /hextra/hero-headline >}}
 
 <div class="profile-container">
     <img src="/images/jellylogo.png" alt="Jellyfish Logo" class="profile-image" />
 
 <div class="profile-text">
-    <h1>Hi, I'm h4mr3r</h1>
-    <p>I'm malware developer @ KPMG and Red Team operator.</p>
+    <h1>Hi, I'm Krzysztof Greś (h4mr3r)</h1>
+    <p>I'm malware developer and Red Team operator.</p>
 </div>
 </div>
+
+<br /><br />
+
+<h2>Certificates</h2>
+
+{{< cards >}}
+  {{< card
+        link="crt_CRTP.png"
+        title="Altered Security - Certified Red Team Professional (CRTP)"
+        image="crt_CRTP.png"
+        imageStyle="object-fit:cover; aspect-ratio:16/9;"
+  >}}
+
+  {{< card
+        link="crt_CPTS.jpeg"
+        title="HackTheBox - Certified Penetration Testing Specialist (CPTS)"
+        image="crt_CPTS.jpeg"
+        imageStyle="object-fit:cover; aspect-ratio:16/9;"
+  >}}
+{{< /cards >}}
+
+
+
 <br /><br /><br />
     <p style="margin: 0; line-height: 1.6;">
     Want to reach out? 
     </p>
-
 
 {{< hextra/feature-grid >}}
   {{< hextra/feature-card
@@ -122,4 +144,3 @@ layout: hextra-home
   >}}
   
 {{< /hextra/feature-grid >}}
-
