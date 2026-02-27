@@ -162,16 +162,16 @@ layout: hextra-home
 
 {{< cards >}}
   {{< card
-        link="crt_CRTP.png"
+        link="/images/certs/crt_CRTP.png"
         title="Altered Security - Certified Red Team Professional (CRTP)"
-        image="crt_CRTP.png"
+        image="/images/certs/crt_CRTP.png"
         imageStyle="object-fit:cover; aspect-ratio:16/9;"
   >}}
 
   {{< card
-        link="crt_CPTS.jpeg"
+        link="/images/certs/crt_CPTS.jpeg"
         title="HackTheBox - Certified Penetration Testing Specialist (CPTS)"
-        image="crt_CPTS.jpeg"
+        image="/images/certs/crt_CPTS.jpeg"
         imageStyle="object-fit:cover; aspect-ratio:16/9;"
   >}}
 {{< /cards >}}
