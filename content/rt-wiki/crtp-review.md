@@ -8,7 +8,7 @@ tags:
 ---
 
 ## Setting the Stage
-I recently sat for the Certified Red Team Professional (CRTP) exam by Pentester Academy. I’ve read plenty of reviews from people who bought the 90-day lab access and spent weeks agonizing over the preparation. I took a different approach: I grabbed the 30-day lab access, dove straight in, and honestly found the whole experience to be a breeze.
+I recently sat for the Certified Red Team Professional (CRTP) exam by Altered Security. I’ve read plenty of reviews from people who bought the 90-day lab access and spent weeks agonizing over the preparation. I took a different approach: I grabbed the 30-day lab access, dove straight in, and honestly found the whole experience to be a breeze.
 
 <div align="center">
   <img src="/images/certs/crt_CRTP.png" alt="CRTP Certificate" width="80%" />
