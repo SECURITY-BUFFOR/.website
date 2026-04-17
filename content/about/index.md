@@ -174,6 +174,34 @@ layout: hextra-home
         image="/images/certs/crt_CPTS.jpeg"
         imageStyle="object-fit:cover; aspect-ratio:16/9;"
   >}}
+
+    {{< card
+        link="/images/certs/crt_CRTO.png"
+        title="Zero-Point Secuirty - Certified Red Team Operator (CRTO)"
+        image="/images/certs/crt_CRTO.png"
+        imageStyle="object-fit:cover; aspect-ratio:16/9;"
+  >}}
+
+  {{< card
+        link="/images/certs/crt_AZRTS.png"
+        title="Cyberwarfare Labs - Azure Red Team Specialist (AZRTS)"
+        image="/images/certs/crt_AZRTS.png"
+        imageStyle="object-fit:cover; aspect-ratio:16/9;"
+  >}}
+
+    {{< card
+        link="/images/certs/crt_AD-RTS.png"
+        title="Cyberwarfare Labs - Active Directory Red Team Specialist (AD-RTS)"
+        image="/images/certs/crt_AD-RTS.png"
+        imageStyle="object-fit:cover; aspect-ratio:16/9;"
+  >}}
+
+      {{< card
+        link="/images/certs/crt_CRTA.png"
+        title="Cyberwarfare Labs - Certified Red Team Analytyst (CRTA)"
+        image="/images/certs/crt_CRTA.png"
+        imageStyle="object-fit:cover; aspect-ratio:16/9;"
+  >}}
 {{< /cards >}}
 
 <br /><br />
