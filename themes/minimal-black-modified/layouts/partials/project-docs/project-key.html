@@ -1,0 +1,8 @@
+{{- $page := . -}}
+{{- $key := "" -}}
+{{- with $page.File -}}
+  {{- $path := strings.TrimPrefix "projects/" .Path -}}
+  {{- $first := index (split $path "/") 0 -}}
+  {{- $key = strings.TrimSuffix ".md" $first -}}
+{{- end -}}
+{{- return $key -}}

@@ -1,0 +1,30 @@
+{{- $images := split (.Get "images") "," -}}
+{{- $issuers := split (.Get "issuers") "," -}}
+{{- $names := split (.Get "names") "," -}}
+
+<div class="cert-gallery" aria-label="Certifications">
+  {{- range $index, $src := $images -}}
+    {{- $image := trim $src " " -}}
+    {{- $issuer := trim (index $issuers $index) " " -}}
+    {{- $name := trim (index $names $index) " " -}}
+    {{- if $image -}}
+      {{- $label := default $image $name -}}
+      {{- $alt := cond $issuer (printf "%s - %s" $issuer $label) $label -}}
+      <figure class="cert-gallery-card">
+        <a
+          href="{{ $image | relURL }}"
+          class="cert-gallery-link glightbox"
+          aria-label="View {{ $alt }}"
+        >
+          <span class="cert-gallery-image-frame">
+            <img src="{{ $image | relURL }}" alt="{{ $alt }}" loading="lazy" decoding="async">
+          </span>
+        </a>
+        <figcaption class="cert-gallery-caption">
+          {{ with $issuer }}<span class="cert-gallery-issuer">{{ . }}</span>{{ end }}
+          <span class="cert-gallery-name">{{ $label }}</span>
+        </figcaption>
+      </figure>
+    {{- end -}}
+  {{- end -}}
+</div>

@@ -1,0 +1,63 @@
+{{- $description := .Params.seoDescription | default .Description | default .Summary | default .Site.Params.description -}}
+{{- $description = $description | plainify -}}
+{{- $keywords := slice -}}
+{{- with .Site.Params.keywords -}}
+  {{- range . -}}
+    {{- $keywords = $keywords | append . -}}
+  {{- end -}}
+{{- end -}}
+{{- with .Params.keywords -}}
+  {{- range . -}}
+    {{- $keywords = $keywords | append . -}}
+  {{- end -}}
+{{- end -}}
+{{- with .Params.tags -}}
+  {{- range . -}}
+    {{- $keywords = $keywords | append . -}}
+  {{- end -}}
+{{- end -}}
+{{- with .Params.categories -}}
+  {{- range . -}}
+    {{- $keywords = $keywords | append . -}}
+  {{- end -}}
+{{- end -}}
+{{- $keywords = uniq $keywords -}}
+
+<meta name="description" content="{{ $description }}" />
+{{- with $keywords }}
+<meta name="keywords" content="{{ delimit . ", " }}" />
+{{- end }}
+{{- with .Site.Params.author }}
+<meta name="author" content="{{ . }}" />
+{{- end }}
+<link rel="canonical" href="{{ .Permalink }}" />
+<meta name="robots" content="{{ .Params.robots | default "index, follow, max-image-preview:large" }}" />
+
+<meta property="og:site_name" content="{{ .Site.Title }}" />
+<meta property="og:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}" />
+<meta property="og:description" content="{{ $description }}" />
+<meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}" />
+<meta property="og:url" content="{{ .Permalink }}" />
+{{- with .Params.image | default .Site.Params.defaultImage }}
+<meta property="og:image" content="{{ . | absURL }}" />
+{{- end }}
+{{- if .IsPage }}
+{{- with .Date }}
+<meta property="article:published_time" content="{{ .Format "2006-01-02T15:04:05Z07:00" }}" />
+{{- end }}
+{{- with .Lastmod }}
+<meta property="article:modified_time" content="{{ .Format "2006-01-02T15:04:05Z07:00" }}" />
+{{- end }}
+{{- range .Params.tags }}
+<meta property="article:tag" content="{{ . }}" />
+{{- end }}
+{{- end }}
+
+<meta name="twitter:card" content="{{ if or .Params.image .Site.Params.defaultImage }}summary_large_image{{ else }}summary{{ end }}" />
+<meta name="twitter:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}" />
+<meta name="twitter:description" content="{{ $description }}" />
+{{- with .Params.image | default .Site.Params.defaultImage }}
+<meta name="twitter:image" content="{{ . | absURL }}" />
+{{- end }}
+
+{{ partial "seo-jsonld.html" (dict "Page" . "Description" $description "Keywords" $keywords) }}

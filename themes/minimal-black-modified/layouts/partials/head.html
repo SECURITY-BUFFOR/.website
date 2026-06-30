@@ -1,0 +1,116 @@
+{{- $title := cond .IsHome (printf "%s | Pentest, Malware Analysis & Security Research" .Site.Title) (printf "%s | %s" .Title .Site.Title) -}}
+{{- $assets := partial "asset-flags.html" . -}}
+{{- $usesDevicon := and .Site.Params.icons.useDevicon (or .IsHome (eq .Section "about")) -}}
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>{{ $title }}</title>
+
+{{ partial "meta.html" . }}
+
+{{ if or $usesDevicon $assets.NeedsLightbox $assets.NeedsGallery $assets.NeedsMermaid }}
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+{{ end }}
+{{ if .Site.Params.icons.useFontAwesome }}
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+{{ end }}
+
+<!-- Favicon -->
+{{ with .Site.Params.favicon }}
+  <link rel="icon" type="image/x-icon" href="{{ . | relURL }}" />
+{{ else }}
+  <!-- Default favicon paths -->
+  {{ if fileExists "static/favicon.ico" }}
+    <link rel="icon" type="image/x-icon" href="{{ "favicon.ico" | relURL }}" />
+  {{ end }}
+  {{ if fileExists "static/favicon.png" }}
+    <link rel="icon" type="image/png" href="{{ "favicon.png" | relURL }}" />
+  {{ end }}
+  {{ if fileExists "static/favicon.svg" }}
+    <link rel="icon" type="image/svg+xml" href="{{ "favicon.svg" | relURL }}" />
+  {{ end }}
+{{ end }}
+
+<!-- Apple Touch Icon -->
+{{ if .Site.Params.appleTouchIcon }}
+  <link rel="apple-touch-icon" href="{{ .Site.Params.appleTouchIcon | relURL }}" />
+{{ else if fileExists "static/apple-touch-icon.png" }}
+  <link rel="apple-touch-icon" href="{{ "apple-touch-icon.png" | relURL }}" />
+{{ end }}
+
+<!-- Web App Manifest -->
+{{ with .Site.GetPage "/" }}
+  {{ range .OutputFormats }}
+    {{ if eq .Name "webappmanifest" }}
+      <link rel="manifest" href="{{ .Permalink }}" />
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+<link rel="stylesheet" href="{{ "css/main.css" | relURL }}"> 
+
+{{ if .Site.Params.icons.useFontAwesome }}
+  <link
+    rel="preload"
+    as="style"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    onload="this.onload=null;this.rel='stylesheet'"
+  >
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"></noscript>
+{{ end }}
+
+{{ if $usesDevicon }}
+  <link
+    rel="preload"
+    as="style"
+    href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.17.0/devicon.min.css"
+    onload="this.onload=null;this.rel='stylesheet'"
+  >
+  <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.17.0/devicon.min.css"></noscript>
+{{ end }}
+
+{{ if $assets.NeedsLightbox }}
+  <!-- GLightbox -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css"
+  />
+{{ end }}
+
+{{ if $assets.NeedsGallery }}
+  <!-- Justified Gallery (Vanilla) -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/justified-gallery@3.8.2/dist/css/justifiedGallery.min.css"
+  />
+{{ end }}
+
+<script>
+  (function () {
+    try {
+      var stored = localStorage.getItem("theme");
+      var systemDark =
+        window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches;
+      var defaultTheme =
+        '{{ default "system" .Site.Params.theme.defaultTheme }}';
+
+      var theme =
+        stored ||
+        (defaultTheme === "dark"
+          ? "dark"
+          : defaultTheme === "light"
+          ? "light"
+          : systemDark
+          ? "dark"
+          : "light");
+
+      document.documentElement.setAttribute("data-theme", theme);
+    } catch (e) {
+      document.documentElement.setAttribute("data-theme", "light");
+    }
+  })();
+</script>
+
+<!-- Analytics -->
+{{ partial "analytics.html" . }}

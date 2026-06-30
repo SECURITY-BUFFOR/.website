@@ -1,0 +1,63 @@
+{{ define "main" }}
+  {{- $page := . -}}
+  {{- $docsRootDir := printf "%s/" $page.Section -}}
+  {{- $docsRootPage := $page.FirstSection -}}
+
+  <link rel="stylesheet" href="{{ "css/cheatsheet.css" | relURL }}">
+
+  <section class="layout-page section-stack">
+    <div class="article-layout project-docs-layout">
+      {{ partial "project-docs/sidebar.html" (dict "Current" $page "DocsRootDir" $docsRootDir "DocsRootPage" $docsRootPage "IndexPage" false "IndexLabel" "") }}
+
+      <article class="article-main cheatsheet-page">
+        <header class="cheatsheet-header">
+          <div>
+            <p class="cheatsheet-kicker">Lair helper tool</p>
+            <h1 class="heading-page">{{ $page.Title }}</h1>
+          </div>
+          {{ with $page.Params.description }}
+            <p>{{ . }}</p>
+          {{ end }}
+        </header>
+
+        <div class="cheatsheet-app" data-cheatsheet-app>
+          <section class="cheatsheet-panel">
+            <div class="cheatsheet-panel-header">
+              <h2>Variables</h2>
+              <button type="button" data-cs-action="reset-vars">Reset</button>
+            </div>
+
+            <div class="cheatsheet-vars">
+              {{ range (slice "LHOST" "RHOST" "LPORT" "RPORT" "DOMAIN" "DC" "USER" "PASS" "HASH" "URL") }}
+                <label class="cheatsheet-field">
+                  <span>{{ . }}</span>
+                  <input data-cs-var="{{ . }}" type="text" autocomplete="off">
+                </label>
+              {{ end }}
+            </div>
+          </section>
+
+          <section class="cheatsheet-panel">
+            <div class="cheatsheet-panel-header">
+              <h2>Commands</h2>
+              <strong data-cs-status aria-live="polite"></strong>
+            </div>
+
+            <div class="cheatsheet-categories" data-cs-categories role="group" aria-label="Command category"></div>
+
+            <label class="cheatsheet-field">
+              <span>Search</span>
+              <input data-cs-query type="search" autocomplete="off" placeholder="Search commands, tools, tags">
+            </label>
+
+            <div class="cheatsheet-command-list" data-cs-commands></div>
+          </section>
+
+          <p class="cheatsheet-auth">Use only in authorized labs and assessments.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <script src="{{ "js/cheatsheet.js" | relURL }}" defer></script>
+{{ end }}

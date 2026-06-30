@@ -1,0 +1,10 @@
+{{- $raw := .RawContent | default "" -}}
+{{- $content := .Content | default "" -}}
+{{- $needsMermaid := or (in $raw "```mermaid") (in $content "class=\"mermaid\"") -}}
+{{- $needsGallery := or (in $raw "{{< gallery") (in $content "data-jg") -}}
+{{- $needsLightbox := or $needsGallery (in $content "glightbox") -}}
+{{- return (dict
+  "NeedsMermaid" $needsMermaid
+  "NeedsGallery" $needsGallery
+  "NeedsLightbox" $needsLightbox
+) -}}

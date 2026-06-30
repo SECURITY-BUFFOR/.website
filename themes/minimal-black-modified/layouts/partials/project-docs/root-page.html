@@ -1,0 +1,7 @@
+{{- $projectKey := .ProjectKey -}}
+{{- $rootPath := printf "projects/%s.md" $projectKey -}}
+{{- $rootPage := false -}}
+{{- range where .Site.RegularPages "File.Path" $rootPath -}}
+  {{- $rootPage = . -}}
+{{- end -}}
+{{- return $rootPage -}}

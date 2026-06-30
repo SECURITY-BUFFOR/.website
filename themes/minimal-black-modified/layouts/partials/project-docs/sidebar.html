@@ -1,0 +1,30 @@
+{{- $current := .Current -}}
+{{- $docsRootPage := .DocsRootPage -}}
+{{- $docsRootDir := .DocsRootDir -}}
+{{- $indexPage := .IndexPage -}}
+{{- $indexLabel := .IndexLabel -}}
+
+<aside class="article-toc project-docs-sidebar" aria-label="Project documentation">
+  <div class="project-docs-wrapper">
+    <div class="project-docs-header">
+      <div>
+        <h2 class="project-docs-title">
+          <i class="fas fa-book-open"></i>
+          <span>Documentation</span>
+        </h2>
+        {{ with $docsRootPage }}
+          <a class="project-docs-root-link" href="{{ .RelPermalink }}">{{ .Title }}</a>
+        {{ end }}
+      </div>
+      {{ with $indexPage }}
+        <a class="project-docs-index" href="{{ .RelPermalink }}">{{ $indexLabel }}</a>
+      {{ end }}
+    </div>
+
+    <nav class="project-docs-nav" aria-label="Project pages">
+      <ul class="project-docs-page-list">
+        {{ partial "project-docs/section-children.html" (dict "Site" $current.Site "Current" $current "Dir" $docsRootDir "Depth" 0) }}
+      </ul>
+    </nav>
+  </div>
+</aside>

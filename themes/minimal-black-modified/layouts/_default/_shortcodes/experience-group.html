@@ -1,0 +1,42 @@
+{{- $company := .Get "company" -}}
+{{- $location := .Get "location" -}}
+{{- $period := .Get "period" -}}
+{{- $summary := .Get "summary" -}}
+{{- $titles := split (.Get "titles") "," -}}
+{{- $dates := split (.Get "dates") "," -}}
+{{- $notes := split (default "" (.Get "notes")) ";;" -}}
+
+<article class="about-alt-experience-card about-alt-experience-group">
+  <div class="about-alt-experience-group-header">
+    <div>
+      <h3 class="about-alt-experience-company">{{ $company }}</h3>
+      {{ with $location }}<p class="about-alt-experience-location">{{ . }}</p>{{ end }}
+    </div>
+    {{ with $period }}<p class="about-alt-experience-period">{{ . }}</p>{{ end }}
+  </div>
+
+  <ol class="about-alt-experience-roles">
+    {{- range $index, $roleTitle := $titles -}}
+      {{- $title := trim $roleTitle " " -}}
+      {{- if $title -}}
+        {{- $roleDates := "" -}}
+        {{- if lt $index (len $dates) -}}
+          {{- $roleDates = trim (index $dates $index) " " -}}
+        {{- end -}}
+        {{- $note := "" -}}
+        {{- if lt $index (len $notes) -}}
+          {{- $note = trim (index $notes $index) " " -}}
+        {{- end -}}
+        <li class="about-alt-experience-role">
+          <div class="about-alt-experience-role-head">
+            <span class="about-alt-experience-role-title">{{ $title }}</span>
+            {{ with $roleDates }}<span class="about-alt-experience-role-dates">{{ . }}</span>{{ end }}
+          </div>
+          {{ with $note }}<p class="about-alt-experience-role-note">{{ . }}</p>{{ end }}
+        </li>
+      {{- end -}}
+    {{- end -}}
+  </ol>
+
+  {{ with $summary }}<p class="about-alt-experience-summary">{{ . }}</p>{{ end }}
+</article>

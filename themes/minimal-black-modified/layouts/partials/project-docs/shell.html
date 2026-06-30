@@ -1,0 +1,51 @@
+{{- $page := . -}}
+{{- $docsRootDir := printf "%s/" $page.Section -}}
+{{- $docsRootPage := $page.FirstSection -}}
+{{- $indexPage := false -}}
+{{- $indexLabel := "" -}}
+
+{{- if eq $page.Section "projects" -}}
+  {{- $projectKey := partial "project-docs/project-key.html" $page -}}
+  {{- $docsRootDir = printf "projects/%s/" $projectKey -}}
+  {{- $docsRootPage = partial "project-docs/root-page.html" (dict "Site" $page.Site "ProjectKey" $projectKey) -}}
+  {{- $indexPage = $page.Site.GetPage "section" "projects" -}}
+  {{- $indexLabel = "All projects" -}}
+{{- end -}}
+
+<section class="layout-page section-stack">
+  <div class="article-layout project-docs-layout">
+    {{ partial "project-docs/sidebar.html" (dict "Current" $page "DocsRootDir" $docsRootDir "DocsRootPage" $docsRootPage "IndexPage" $indexPage "IndexLabel" $indexLabel) }}
+
+    <article class="article-main space-y-4">
+      <header class="space-y-2">
+        <h1 class="heading-page text-2xl sm:text-3xl">{{ $page.Title }}</h1>
+
+        {{ if eq $page.Kind "page" }}
+          {{ $hasDate := not $page.Date.IsZero }}
+          <div class="text-[0.75rem] text-muted">
+            {{ if $hasDate }}
+              {{ with $page.Date }}
+              <span>{{ .Format "02 Jan 2006" }}</span>
+              {{ end }}
+            {{ end }}
+            {{ with $page.ReadingTime }}
+              <span>{{ if $hasDate }} • {{ end }}{{ . }} min read</span>
+            {{ end }}
+          </div>
+        {{ end }}
+
+        {{ with $page.Params.description }}
+          <p class="max-w-xl text-sm text-muted">
+            {{ . }}
+          </p>
+        {{ end }}
+      </header>
+
+      <div class="card card-pad">
+        <div class="markdown-body">
+          {{ $page.Content }}
+        </div>
+      </div>
+    </article>
+  </div>
+</section>

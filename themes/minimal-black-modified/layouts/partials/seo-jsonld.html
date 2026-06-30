@@ -1,0 +1,64 @@
+{{- $page := .Page -}}
+{{- $description := .Description -}}
+{{- $keywords := .Keywords -}}
+{{- $publisherName := $page.Site.Params.author | default $page.Site.Params.brand | default $page.Site.Title -}}
+{{- $publisher := dict "@type" "Organization" "name" $publisherName "url" $page.Site.BaseURL -}}
+{{- $items := slice -}}
+
+{{- if $page.IsHome -}}
+  {{- $items = $items | append (dict
+    "@context" "https://schema.org"
+    "@type" "WebSite"
+    "name" $page.Site.Title
+    "url" $page.Site.BaseURL
+    "description" $description
+    "publisher" $publisher
+    "keywords" (delimit $keywords ", ")
+  ) -}}
+{{- else -}}
+  {{- $breadcrumbs := slice -}}
+  {{- $position := 1 -}}
+  {{- range $page.Ancestors.Reverse -}}
+    {{- if not .IsHome -}}
+      {{- $name := .Title -}}
+      {{- if not $name -}}
+        {{- $name = .Section | humanize -}}
+      {{- end -}}
+      {{- $breadcrumbs = $breadcrumbs | append (dict "@type" "ListItem" "position" $position "name" $name "item" .Permalink) -}}
+      {{- $position = add $position 1 -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $breadcrumbs = $breadcrumbs | append (dict "@type" "ListItem" "position" $position "name" $page.Title "item" $page.Permalink) -}}
+  {{- if ge (len $breadcrumbs) 2 -}}
+    {{- $items = $items | append (dict
+      "@context" "https://schema.org"
+      "@type" "BreadcrumbList"
+      "itemListElement" $breadcrumbs
+    ) -}}
+  {{- end -}}
+
+  {{- if $page.IsPage -}}
+    {{- $article := dict
+      "@context" "https://schema.org"
+      "@type" "Article"
+      "headline" $page.Title
+      "description" $description
+      "url" $page.Permalink
+      "mainEntityOfPage" $page.Permalink
+      "author" $publisher
+      "publisher" $publisher
+      "keywords" (delimit $keywords ", ")
+    -}}
+    {{- if not $page.Date.IsZero -}}
+      {{- $article = merge $article (dict "datePublished" ($page.Date.Format "2006-01-02T15:04:05Z07:00")) -}}
+    {{- end -}}
+    {{- if not $page.Lastmod.IsZero -}}
+      {{- $article = merge $article (dict "dateModified" ($page.Lastmod.Format "2006-01-02T15:04:05Z07:00")) -}}
+    {{- end -}}
+    {{- $items = $items | append $article -}}
+  {{- end -}}
+{{- end -}}
+
+{{- range $items }}
+<script type="application/ld+json">{{ . | jsonify | safeJS }}</script>
+{{- end }}

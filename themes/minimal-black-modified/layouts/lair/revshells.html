@@ -1,0 +1,154 @@
+{{ define "main" }}
+  {{- $page := . -}}
+  {{- $docsRootDir := printf "%s/" $page.Section -}}
+  {{- $docsRootPage := $page.FirstSection -}}
+
+  <link rel="stylesheet" href="{{ "css/revshells.css" | relURL }}">
+
+  <section class="layout-page section-stack">
+    <div class="article-layout project-docs-layout">
+      {{ partial "project-docs/sidebar.html" (dict "Current" $page "DocsRootDir" $docsRootDir "DocsRootPage" $docsRootPage "IndexPage" false "IndexLabel" "") }}
+
+      <article class="article-main revshells-page">
+        <header class="revshells-header">
+          <div>
+            <p class="revshells-kicker">LAIR Helper tool</p>
+            <h1 class="heading-page">{{ $page.Title }}</h1>
+          </div>
+          {{ with $page.Params.description }}
+            <p>{{ . }}</p>
+          {{ end }}
+        </header>
+
+        <div class="revshells-app" data-revshells-app>
+          <div class="revshells-panel revshells-config">
+            <div class="revshells-panel-header">
+              <h2>Target</h2>
+              <button class="revshells-button" type="button" data-rs-action="reset">Reset</button>
+            </div>
+
+            <div class="revshells-grid">
+              <label class="revshells-field">
+                <span>IP</span>
+                <input data-rs-field="ip" type="text" inputmode="numeric" autocomplete="off">
+              </label>
+
+              <label class="revshells-field revshells-port-field">
+                <span>Port</span>
+                <span class="revshells-inline">
+                  <input data-rs-field="port" type="number" min="1" max="65535" inputmode="numeric">
+                  <button class="revshells-icon-button" type="button" data-rs-action="increment-port" aria-label="Increment port">+1</button>
+                </span>
+              </label>
+
+            </div>
+          </div>
+
+          <div class="revshells-panel">
+            <div class="revshells-panel-header">
+              <h2>Payloads</h2>
+              <span data-rs-meta></span>
+            </div>
+
+            <div class="revshells-platforms" role="group" aria-label="Platform">
+              <button type="button" data-rs-os="linux">Linux</button>
+              <button type="button" data-rs-os="windows">Windows</button>
+              <button type="button" data-rs-os="mac">macOS</button>
+            </div>
+
+            <div class="revshells-tabs" role="group" aria-label="Payload type">
+              <button type="button" data-rs-type="reverse">Reverse</button>
+              <button type="button" data-rs-type="bind">Bind</button>
+              <button type="button" data-rs-type="msfvenom">MSFVenom</button>
+              <button type="button" data-rs-type="hoaxshell">HoaxShell</button>
+              <button type="button" data-rs-type="assembled">Assembled</button>
+            </div>
+
+            <div class="revshells-grid revshells-grid-compact">
+              <label class="revshells-field">
+                <span>Name</span>
+                <input data-rs-field="query" type="search" autocomplete="off" placeholder="Search payloads">
+              </label>
+
+              <label class="revshells-field revshells-field-wide">
+                <span>Payload</span>
+                <select data-rs-field="payloadId"></select>
+              </label>
+            </div>
+
+            <div class="revshells-options" data-rs-options aria-label="Payload options" hidden>
+              <label class="revshells-field" data-rs-option="shell" hidden>
+                <span>Payload shell</span>
+                <select data-rs-field="shell"></select>
+              </label>
+
+              <label class="revshells-field" data-rs-option="name" hidden>
+                <span>File name</span>
+                <input data-rs-field="name" type="text" autocomplete="off">
+              </label>
+
+              <label class="revshells-field" data-rs-option="session" hidden>
+                <span>Session</span>
+                <input data-rs-field="session" type="text" autocomplete="off">
+              </label>
+            </div>
+          </div>
+
+          <div class="revshells-panel">
+            <div class="revshells-panel-header">
+              <h2>Output</h2>
+            </div>
+
+            <div class="revshells-grid revshells-grid-output">
+              <label class="revshells-field">
+                <span>Encoding</span>
+                <select data-rs-field="encoding">
+                  <option value="none">None</option>
+                  <option value="url">URL encode</option>
+                  <option value="double-url">Double URL encode</option>
+                  <option value="base64">Base64</option>
+                </select>
+              </label>
+            </div>
+          </div>
+
+          <div class="revshells-output-grid">
+            <section class="revshells-output">
+              <div class="revshells-output-header">
+                <h2>Payload</h2>
+                <div>
+                  <button class="revshells-button" type="button" data-rs-action="download">Download</button>
+                  <button class="revshells-button" type="button" data-rs-action="copy-payload">Copy</button>
+                </div>
+              </div>
+              <textarea data-rs-output="payload" spellcheck="false" readonly></textarea>
+            </section>
+
+            <section class="revshells-output">
+              <div class="revshells-output-header">
+                <h2>Listener</h2>
+                <button class="revshells-button" type="button" data-rs-action="copy-listener">Copy</button>
+              </div>
+              <textarea data-rs-output="listener" spellcheck="false" readonly></textarea>
+            </section>
+
+            <section class="revshells-output revshells-output-wide">
+              <div class="revshells-output-header">
+                <h2>Raw</h2>
+                <button class="revshells-button" type="button" data-rs-action="copy-raw">Copy</button>
+              </div>
+              <textarea data-rs-output="raw" spellcheck="false" readonly></textarea>
+            </section>
+          </div>
+
+          <div class="revshells-status-row">
+            <span>Use only in authorized labs and assessments.</span>
+            <strong data-rs-status aria-live="polite"></strong>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <script src="{{ "js/revshells.js" | relURL }}" defer></script>
+{{ end }}

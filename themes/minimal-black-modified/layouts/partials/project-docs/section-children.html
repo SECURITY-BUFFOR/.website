@@ -1,0 +1,54 @@
+{{- $site := .Site -}}
+{{- $current := .Current -}}
+{{- $dir := .Dir -}}
+{{- $depth := .Depth -}}
+{{- $childDepth := add $depth 1 -}}
+{{- $sections := slice -}}
+{{- $pages := slice -}}
+
+{{- range where $site.Pages "Kind" "section" -}}
+  {{- $section := . -}}
+  {{- with .File -}}
+    {{- if and (strings.HasPrefix .Dir $dir) (ne .Dir $dir) -}}
+      {{- $rest := strings.TrimPrefix $dir .Dir -}}
+      {{- $rest = strings.TrimSuffix "/" $rest -}}
+      {{- if and $rest (not (strings.Contains $rest "/")) -}}
+        {{- $sections = $sections | append $section -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- range where $site.RegularPages "File.Dir" $dir -}}
+  {{- $pages = $pages | append . -}}
+{{- end -}}
+
+{{- range sort $sections "Weight" -}}
+  {{- $isOpen := or (eq .RelPermalink $current.RelPermalink) (strings.HasPrefix $current.RelPermalink .RelPermalink) -}}
+  <li class="project-docs-category">
+    <details {{ if $isOpen }}open{{ end }}>
+      <summary>
+        <span class="project-docs-category-label">{{ .Title }}</span>
+        <i class="fas fa-chevron-right" aria-hidden="true"></i>
+      </summary>
+      <ul class="project-docs-page-list project-docs-depth-{{ $childDepth }}">
+        {{ partial "project-docs/section-children.html" (dict "Site" $site "Current" $current "Dir" .File.Dir "Depth" $childDepth) }}
+      </ul>
+    </details>
+  </li>
+{{- end -}}
+
+{{- range sort $pages "Weight" -}}
+  <li>
+    <a
+      href="{{ .RelPermalink }}"
+      class="{{ if eq .RelPermalink $current.RelPermalink }}active{{ end }}"
+      {{ if eq .RelPermalink $current.RelPermalink }}aria-current="page"{{ end }}
+    >
+      <span class="project-docs-link-title">{{ .Title }}</span>
+      {{ with .Params.description }}
+        <span class="project-docs-link-description">{{ . }}</span>
+      {{ end }}
+    </a>
+  </li>
+{{- end -}}
