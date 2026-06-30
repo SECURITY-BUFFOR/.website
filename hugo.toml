@@ -33,7 +33,7 @@ theme = "minimal-black-modified"
 
   # Favicon - Place your favicon files in /static/ directory
   # Supported formats: .ico, .png, .svg
-  favicon = "icons/favicon.svg"
+  favicon = "favicon.ico"
   appleTouchIcon = "apple-touch-icon.png"
 
   # Logo (optional)
