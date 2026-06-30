@@ -1,0 +1,323 @@
+.revshells-page {
+  --rs-black: #000000;
+  --rs-panel: #0b0c0a;
+  --rs-panel-2: #11130f;
+  --rs-line: rgba(198, 255, 74, 0.32);
+  --rs-muted: #a7ad9b;
+  --rs-text: #f1f5e8;
+  --rs-signal: #c6ff4a;
+  font-family: "JetBrains Mono", "IBM Plex Mono", ui-monospace, SFMono-Regular,
+    Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+}
+
+html[data-theme="light"] .revshells-page {
+  --rs-black: #f7f7f8;
+  --rs-panel: #ffffff;
+  --rs-panel-2: #eef1ea;
+  --rs-line: rgba(64, 92, 24, 0.28);
+  --rs-muted: #5f6855;
+  --rs-text: #151815;
+  --rs-signal: #3f6f00;
+}
+
+.revshells-header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  color: var(--rs-text);
+}
+
+.revshells-header h1 {
+  font-family: inherit;
+  letter-spacing: 0;
+}
+
+.revshells-header p {
+  max-width: 68ch;
+  margin: 0;
+  color: var(--rs-muted);
+  font-size: 0.84rem;
+  line-height: 1.6;
+}
+
+.revshells-kicker {
+  margin: 0 0 0.35rem;
+  color: var(--rs-signal) !important;
+  font-size: 0.72rem !important;
+  text-transform: uppercase;
+}
+
+.revshells-app {
+  display: grid;
+  gap: 0.85rem;
+  padding: 0.85rem;
+  background: var(--rs-black);
+  border: 1px solid var(--rs-line);
+  color: var(--rs-text);
+}
+
+.revshells-panel,
+.revshells-output {
+  background: var(--rs-panel);
+  border: 1px solid rgba(241, 245, 232, 0.16);
+}
+
+html[data-theme="light"] .revshells-panel,
+html[data-theme="light"] .revshells-output {
+  border-color: rgba(21, 24, 21, 0.14);
+}
+
+.revshells-panel {
+  padding: 0.85rem;
+}
+
+.revshells-panel-header,
+.revshells-output-header,
+.revshells-status-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.revshells-panel-header {
+  margin-bottom: 0.75rem;
+}
+
+.revshells-panel h2,
+.revshells-output h2 {
+  margin: 0;
+  color: var(--rs-text);
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.revshells-panel-header span,
+.revshells-status-row {
+  color: var(--rs-muted);
+  font-size: 0.72rem;
+}
+
+.revshells-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.revshells-grid-compact {
+  grid-template-columns: minmax(12rem, 0.8fr) minmax(16rem, 1.4fr);
+}
+
+.revshells-grid-output {
+  grid-template-columns: minmax(14rem, 24rem);
+}
+
+.revshells-options {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(241, 245, 232, 0.14);
+}
+
+html[data-theme="light"] .revshells-options {
+  border-top-color: rgba(21, 24, 21, 0.14);
+}
+
+.revshells-options[hidden] {
+  display: none;
+}
+
+.revshells-field,
+.revshells-inline {
+  display: grid;
+  gap: 0.35rem;
+  min-width: 0;
+}
+
+.revshells-field-wide {
+  grid-column: auto;
+}
+
+.revshells-field span {
+  color: var(--rs-muted);
+  font-size: 0.72rem;
+}
+
+.revshells-field input,
+.revshells-field select,
+.revshells-output textarea {
+  width: 100%;
+  min-width: 0;
+  border: 1px solid rgba(198, 255, 74, 0.28);
+  border-radius: 0;
+  background: var(--rs-panel-2);
+  color: var(--rs-text);
+  font: inherit;
+  font-size: 0.82rem;
+  letter-spacing: 0;
+  outline: none;
+}
+
+.revshells-field input,
+.revshells-field select {
+  min-height: 2.4rem;
+  padding: 0.5rem 0.65rem;
+}
+
+.revshells-field input:focus,
+.revshells-field select:focus,
+.revshells-output textarea:focus {
+  border-color: var(--rs-signal);
+}
+
+.revshells-inline {
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.revshells-tabs,
+.revshells-platforms {
+  display: grid;
+  gap: 0.35rem;
+  margin-bottom: 0.75rem;
+}
+
+.revshells-platforms {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.revshells-tabs {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.revshells-tabs button,
+.revshells-platforms button,
+.revshells-button,
+.revshells-icon-button {
+  min-height: 2.25rem;
+  border: 1px solid rgba(198, 255, 74, 0.38);
+  border-radius: 0;
+  background: transparent;
+  color: var(--rs-text);
+  font: inherit;
+  font-size: 0.75rem;
+  letter-spacing: 0;
+  cursor: pointer;
+}
+
+.revshells-tabs button,
+.revshells-platforms button {
+  padding: 0.45rem 0.35rem;
+  overflow-wrap: anywhere;
+}
+
+.revshells-button,
+.revshells-icon-button {
+  padding: 0.4rem 0.65rem;
+}
+
+.revshells-tabs button:hover,
+.revshells-platforms button:hover,
+.revshells-button:hover,
+.revshells-icon-button:hover,
+.revshells-tabs button.is-active,
+.revshells-platforms button.is-active {
+  background: var(--rs-signal);
+  color: var(--rs-black);
+}
+
+.revshells-output-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem;
+}
+
+.revshells-output {
+  min-width: 0;
+}
+
+.revshells-output-wide {
+  grid-column: 1 / -1;
+}
+
+.revshells-output-header {
+  padding: 0.7rem 0.85rem;
+  border-bottom: 1px solid rgba(241, 245, 232, 0.16);
+}
+
+html[data-theme="light"] .revshells-output-header {
+  border-bottom-color: rgba(21, 24, 21, 0.14);
+}
+
+.revshells-output-header div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.revshells-output textarea {
+  display: block;
+  height: 12rem;
+  padding: 0.85rem;
+  resize: vertical;
+  border: 0;
+  border-top: 1px solid transparent;
+  color: var(--rs-signal);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.55;
+}
+
+.revshells-output-wide textarea {
+  height: 8rem;
+}
+
+.revshells-status-row {
+  min-height: 1.5rem;
+  padding: 0 0.15rem;
+}
+
+.revshells-status-row strong {
+  color: var(--rs-signal);
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
+@media (max-width: 900px) {
+  .revshells-grid,
+  .revshells-grid-compact,
+  .revshells-options,
+  .revshells-output-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .revshells-tabs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .revshells-platforms {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 520px) {
+  .revshells-app,
+  .revshells-panel {
+    padding: 0.65rem;
+  }
+
+  .revshells-panel-header,
+  .revshells-output-header,
+  .revshells-status-row {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .revshells-tabs,
+  .revshells-platforms {
+    grid-template-columns: 1fr;
+  }
+}

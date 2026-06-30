@@ -1,11 +1,8 @@
----
-linkTitle: "Usermode codesnippets that could be useful"
-title: LAIR
----
++++
+title = "LAIR"
+description = "Security research documentation for pentest methodology, malware analysis notes, threat hunting workflows, and operational security references."
+keywords = ["pentest methodology", "malware analysis", "threat hunting", "security operations", "incident response"]
+weight = 10
++++
 
-{{< cards >}}
-  {{< card link="/lair/communication" title="Comunication" icon="document-duplicate" >}}
-  {{< card link="/lair/cryptography" title="Cryptography"icon="document-duplicate" >}}
-  {{< card link="/lair/processsynchronization" title="Process Synchronization"icon="document-duplicate" >}}
-
-{{< /cards >}}
+Checkout the Pentest Cheatsheet and Reverse Shell generator for pentest purpose.
